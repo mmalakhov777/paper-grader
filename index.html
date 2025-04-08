@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myStylus - Grade and Enhance
+    Paper in Minutes</title>
+  
+  <!-- Preconnect to external resources as early as possible -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+  
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="/src/fonts/Orbikular (1).ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/src/fonts/Orbikular-Variable-Italic-VF.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/src/fonts/aeonikpro-regular.otf" as="font" type="font/otf" crossorigin>
+  
+  <!-- Preload Google Fonts CSS -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  </noscript>
+  
+  <!-- Use scoped critical CSS for initial render -->
+  <style id="critical-css">
+    /* Critical styles for initial render */
+    :root {
+      --font-aeonik: 'Aeonik Pro', 'Aeonik Pro Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-orbikular: 'Orbikular', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    /* Font face declarations with display:swap for better font loading */
+    @font-face {
+      font-family: 'Orbikular';
+      src: local('Orbikular'),
+           url('/src/fonts/Orbikular (1).ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Orbikular';
+      src: local('Orbikular'),
+           url('/src/fonts/Orbikular-Variable-Italic-VF.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Aeonik Pro';
+      src: local('Aeonik Pro'),
+           url('/src/fonts/aeonikpro-regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    /* Fallback fonts */
+    @font-face {
+      font-family: 'Aeonik Pro Fallback';
+      size-adjust: 97.5%;
+      ascent-override: 93%;
+      src: local('Arial');
+    }
+    
+    /* Basic styles for faster initial render */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-aeonik);
+      background-color: #f8fafc;
+      color: #334155;
+    }
+    
+    /* Critical layout classes */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .text-center { text-align: center; }
+    
+    /* Critical text styles */
+    h1 {
+      margin-top: 0;
+      font-family: var(--font-orbikular);
+      font-weight: normal;
+    }
+    
+    h1 em {
+      font-family: var(--font-orbikular);
+      font-style: italic;
+    }
+    
+    h2 {
+      font-family: var(--font-aeonik);
+      font-weight: 500;
+    }
+    
+    /* Prevent FOUC (Flash of Unstyled Content) with controlled opacity */
+    #root {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .critical-css-loaded #root {
+      opacity: 1;
+    }
+    
+    /* Loading spinner while critical assets load */
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #232323;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -24px;
+      margin-left: -24px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <link rel="icon" type="image/png" href="/Favicon (1).png">
+  <meta name="description" content="myStylus helps you craft perfect content by analyzing your text and providing real-time suggestions to enhance your writing style, clarity, and impact." />
+</head>
+<body>
+  <div id="root">
+    <!-- Загрузочный спиннер для лучшего UX -->
+    <div class="loading-spinner"></div>
+  </div>
+  
+  <!-- Скрипты -->
+  <script type="module" src="/src/main.tsx"></script>
+  
+  <!-- Google Analytics с отложенной загрузкой -->
+  <script>
+    // Функция для отложенной загрузки аналитики
+    function loadGoogleAnalytics() {
+      if (navigator.sendBeacon) {
+        // Use newer Beacon API if available
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9190SYNDV7';
+        script.async = true;
+        document.body.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9190SYNDV7', {
+          'send_page_view': false,
+          'page_location': window.location.href,
+          'cookie_flags': 'SameSite=None;Secure'
+        });
+        
+        // Отправка page_view после загрузки страницы
+        if (document.readyState === 'complete') {
+          gtag('event', 'page_view');
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(function() {
+              gtag('event', 'page_view');
+            }, 100);
+          });
+        }
+      }
+    }
+    
+    // Стратегия отложенной загрузки аналитики - load after important content
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadGoogleAnalytics, { timeout: 5000 });
+    } else {
+      // Fallback - load after page becomes interactive
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(loadGoogleAnalytics, 3000);
+      });
+    }
+  </script>
+  
+  <script>
+    // Add fonts-loading class immediately
+    document.documentElement.classList.add('fonts-loading');
+    
+    // FontFaceObserver equivalent - watch for font loading
+    if ('fonts' in document) {
+      Promise.all([
+        document.fonts.load('1em "Aeonik Pro"'),
+        document.fonts.load('1em "Orbikular"'),
+        document.fonts.load('1em "Inter"')
+      ]).then(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      }).catch(() => {
+        // If font loading failed, still show content
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    } else {
+      // Fallback for browsers that don't support font loading API
+      setTimeout(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      }, 300);
+    }
+  </script>
+</body>
+</html>
