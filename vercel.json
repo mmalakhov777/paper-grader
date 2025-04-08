@@ -1,12 +1,6 @@
 {
   "version": 2,
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "framework": "vite",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
   "routes": [
     { "src": "/ai-detector", "dest": "/index.html" },
     { "src": "/ai-detector/pt", "dest": "/index.html" },
