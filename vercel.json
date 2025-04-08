@@ -1,6 +1,7 @@
 {
   "version": 2,
   "framework": "vite",
+  "outputDirectory": "dist",
   "routes": [
     { "src": "/ai-detector", "dest": "/index.html" },
     { "src": "/ai-detector/pt", "dest": "/index.html" },
