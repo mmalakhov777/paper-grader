@@ -6,6 +6,18 @@
   <title>myStylus - Grade and Enhance
     Paper in Minutes</title>
   
+  <!-- SPA redirect handling -->
+  <script>
+    // Check if coming from a redirect
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+  
   <!-- Preconnect to external resources as early as possible -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
