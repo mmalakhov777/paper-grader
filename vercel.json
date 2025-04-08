@@ -2,31 +2,9 @@
   "version": 2,
   "framework": "vite",
   "outputDirectory": "dist",
-  "routes": [
-    { "src": "/ai-detector", "dest": "/index.html" },
-    { "src": "/ai-detector/pt", "dest": "/index.html" },
-    { "src": "/ai-detector/pt-br", "dest": "/index.html" },
-    { "src": "/ai-detector/es", "dest": "/index.html" },
-    { "src": "/ai-detector/es-mx", "dest": "/index.html" },
-    { "src": "/plagiarism-checker", "dest": "/index.html" },
-    { "src": "/plagiarism-checker/pt", "dest": "/index.html" },
-    { "src": "/plagiarism-checker/pt-br", "dest": "/index.html" },
-    { "src": "/plagiarism-checker/es", "dest": "/index.html" },
-    { "src": "/plagiarism-checker/es-mx", "dest": "/index.html" },
-    { "src": "/ai-proofreading", "dest": "/index.html" },
-    { "src": "/ai-proofreading/pt", "dest": "/index.html" },
-    { "src": "/ai-proofreading/pt-br", "dest": "/index.html" },
-    { "src": "/ai-proofreading/es", "dest": "/index.html" },
-    { "src": "/ai-proofreading/es-mx", "dest": "/index.html" },
-    { "src": "/ai-paraphrasing-tool", "dest": "/index.html" },
-    { "src": "/ai-paraphrasing-tool/pt", "dest": "/index.html" },
-    { "src": "/ai-paraphrasing-tool/pt-br", "dest": "/index.html" },
-    { "src": "/ai-paraphrasing-tool/es", "dest": "/index.html" },
-    { "src": "/ai-paraphrasing-tool/es-mx", "dest": "/index.html" },
-    { "src": "/pt", "dest": "/index.html" },
-    { "src": "/pt-br", "dest": "/index.html" },
-    { "src": "/es", "dest": "/index.html" },
-    { "src": "/es-mx", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 } 
