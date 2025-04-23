@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { preserveParamsInHref } from '@/components/ui/PreservingLink';
-import { getUrlParams } from '@/lib/urlUtils';
+import { getUrlParams, detectLanguageFromPath } from '@/lib/urlUtils';
 
 /**
  * Component that intercepts click events on all anchor tags
@@ -48,6 +48,15 @@ export function AnchorInterceptor({ children }: { children: React.ReactNode }) {
         ) {
           // Get current URL parameters
           const params = getUrlParams();
+          
+          // Check if we need to add language from the path
+          if (!params['lang']) {
+            const languageCode = detectLanguageFromPath(location.pathname);
+            if (languageCode) {
+              params['lang'] = languageCode;
+            }
+          }
+          
           if (Object.keys(params).length === 0) return;
           
           e.preventDefault();
@@ -83,7 +92,7 @@ export function AnchorInterceptor({ children }: { children: React.ReactNode }) {
     return () => {
       document.removeEventListener('click', clickHandler);
     };
-  }, [navigate, location.search]); // Re-run if the search params change
+  }, [navigate, location.search, location.pathname]); // Re-run if the search params or pathname change
 
   return <>{children}</>;
 } 

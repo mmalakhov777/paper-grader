@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, LinkProps } from 'react-router-dom';
+import { Link as RouterLink, LinkProps, useLocation } from 'react-router-dom';
 import { addParamsToUrl } from '@/lib/urlUtils';
 
 type PreservingLinkProps = Omit<LinkProps, 'to'> & {
@@ -30,10 +30,30 @@ export default function PreservingLink({
   children,
   ...props
 }: PreservingLinkProps) {
+  const location = useLocation();
+  
   // For external links, use regular anchor tags
   if (external || to.startsWith('http') || to.startsWith('//') || to.startsWith('mailto:')) {
+    // For external links with preserveParams, add query parameters
+    let finalHref = to;
+    if (preserveParams) {
+      const [baseUrl, existingSearch] = to.split('?');
+      const targetParams = new URLSearchParams(existingSearch || '');
+      const currentParams = new URLSearchParams(location.search);
+      
+      // Copy all current params to the external URL
+      currentParams.forEach((value, key) => {
+        if (!targetParams.has(key)) {
+          targetParams.append(key, value);
+        }
+      });
+      
+      const newSearch = targetParams.toString();
+      finalHref = newSearch ? `${baseUrl}?${newSearch}` : baseUrl;
+    }
+    
     return (
-      <a href={to} className={className} target="_blank" rel="noopener noreferrer" {...props}>
+      <a href={finalHref} className={className} target="_blank" rel="noopener noreferrer" {...props}>
         {children}
       </a>
     );
